@@ -2,7 +2,40 @@ var mongoose = require('mongoose');
 var Article = require('./../models/Article.js');
 var errorHandler = require('./errors.server.controller');
 var _ = require('lodash');
-
+exports.all=function(req,res){
+  Article.find(function(err,data){
+    if(err){
+      return res.status(400).send({
+        message:errorHandler.geterrorMessage(err)
+      });
+    }else{
+      console.log("api called");
+      res.render('./../public/views/article/all.ejs',{
+    user:req.user||null,
+    request:req,
+    articles:data
+    });
+    }
+  });
+};
+exports.new=function(req,res){
+  res.render('./../public/views/article/create.ejs',{
+    user:req.user||null,
+    request:req
+  });
+};
+exports.edit=function(req,res){
+  res.render('./../public/views/article/edit.ejs',{
+    user:req.user||null,
+    request:req
+  });
+};
+exports.view=function(req,res){
+  res.render('./../public/views/article/view.ejs',{
+    user:req.user||null,
+    request:req
+  });
+};
 module.exports.list = function(req, res) {
   Article.find(function(err, data) {
     if (err) {
@@ -17,7 +50,6 @@ module.exports.list = function(req, res) {
     }
   });
 };
-
 module.exports.create = function(req, res) {
   var article = new Article(req.body);
   article.user = req.user;
@@ -32,7 +64,6 @@ module.exports.create = function(req, res) {
     }
   });
 };
-
 module.exports.read = function(req, res) {
   res.json(req.article);
 };
