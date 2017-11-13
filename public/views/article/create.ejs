@@ -1,37 +1,43 @@
 <html>
     <head>
-        <tittle>
-            New Article</tittle>
+        <title>Create Article</title>
     </head>
     <body>
-    <h1>New Article</h1>
-    <div>Title:
-    <input type="text" id = "title"/>
-    </div>
-    <div>Content:
-    <textarea id ="content"></textarea>
-    </div><br>
-    <button id="submit">Submit</button>
-    <script src="/lib/vendor/jquery/dist/jequery.min.js"></script>
-    <script>
-        var artitcle ={title:"",content:""};
-        $("#title").change(function(){
-            article.title=$("#title").val();
-        });
-        $("#title").change(function(){
-            article.title=$("#content").val();
-        });
-        $("#submit").click(function()){
-            console.log(article);
-            $.jax({
-                method:"POST",
-                url:"/api/articles",
-                data:article
-            }).done(function(response){
-                console.log(response);
+        <h1>Article</h1>
+        <div>Title:
+                <input type="text" id ="title"/>
+        </div><br>
+        <div>Content:
+                <textarea id= "content"></textarea>
+        </div><br>
+            <button id ="submit">Submit</button>
+        
+        
+        <script src="/lib/jquery/dist/jquery.min.js"></script> 
+        <script>
+            
+            var article = {title: "", content:""};
+            $("#title").change(function(){
+                article.title = $("#title").val();
+            });
+             $("#content").change(function(){
+                article.content = $("#content").val();
             });
             
-        });
-    </script>
-    </body>
+            $("#submit").click(function(){
+                console.log(article);
+                $.ajax({
+                    
+                    method: "POST",
+                    url:"/api/articles",
+                    data: article
+                    
+                    
+                }).done(function(response){
+                    console.log(response);
+                });
+            });
+        </script>
+        
+        </body>
 </html>
