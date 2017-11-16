@@ -4,17 +4,22 @@ module.exports = function(app){
  var users = require('./../controllers/users.server.controller.js');
 
  app.route('/products/new')
-    .get(products.new);
-    
- app.route('/products/all')
-    .get(products.all);
-    
- app.route('/products/:productId')
-    .get(products.view);
-    
- app.route('/products/edit/:productId')
-    .get(products.edit);
- 
+	.get(products.new);
+	
+	app.route('/products/all')
+	.get(products.all);
+	
+	app.route('/products/:productId')
+	.get(products.view);
+
+	app.route('/products/edit/:productId')
+	.get(products.edit);
+	
+		app.route('/products/:productId')
+	.get(products.create);
+	
+
+	
  app.route('/api/products')
 	.get(products.list)
 	.post(users.requiresLogin, products.create);
